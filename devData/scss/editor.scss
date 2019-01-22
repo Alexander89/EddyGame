@@ -1,0 +1,335 @@
+// helper classes
+$boxBackground: rgba(0,0,0,0.5);
+$boxBorderRadius: 10px;
+$font-color: #fff;
+
+* {
+    font-family: "Comic Sans MS";
+    font-size: 12pt;
+    margin: 0;
+    padding: 0;
+    color: $font-color;
+    box-sizing: border-box;
+}
+
+.button {
+    text-align: center;
+    padding: 5px 10px;
+    border: 3px solid white;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    white-space: nowrap;
+    margin: 0 5px;
+
+    &:hover {
+        background: rgba(0,0,0,0.3);
+    }
+}
+
+body {
+    background: url("../img/eddyMap.png");
+    background-attachment: fixed;
+    background-size: 100%;
+
+    #overlay {
+        padding-top: 75px;
+        transition: visibility 0s, opacity 0.5s, linear;
+        visibility: hidden;
+        opacity: 0;
+        background-color: rgba(0,0,0,0.8);
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+
+        &.visible {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .loadingOverlayContent {
+            display: flex;
+            flex-direction: column;
+            width: 500px;
+            background: #222;
+            border-radius: $boxBorderRadius;
+            border: 3px solid #fff;
+            color: #fff;
+            padding: 10px;
+
+            .overlayHeader {}
+
+            .mapItemScroll {
+                max-height: 310px;
+                overflow-y: auto;
+                padding: 0 5px;
+
+                .mapItem {
+                    border: 1px solid #fff;
+                    margin: 10px 0;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .mapImage {
+                        margin: 5px;
+                    }
+
+                    .mapInfo {
+                        display: flex;
+                        flex-direction: column;
+                        flex: 2;
+                    }
+
+                    .button {
+                        flex: 1;
+                        font-size: 12px;
+                        border-width: 1px;
+                    }
+                }
+            }
+        }
+    }
+
+    .contentWrapper {
+        padding-bottom: 20px;
+        display: flex;
+        width: 100%;
+        @media screen and (max-width: 1000px) {
+            flex-direction: column-reverse;
+        }
+
+        .settingsPane {
+            align-self: stretch;
+            display: inherit;
+            flex-direction: column;
+            margin: 0 10px;
+
+            .optionsWrapper {
+                display: flex;
+                justify-content: flex-start;
+
+                .button {
+                    margin: 10px 5px;
+                }
+            }
+
+            .settingsWrapper {
+                display: flex;
+                flex-direction: column;
+
+                h2 {
+                    margin: 5px 0;
+                    font-size: 18px;
+                    text-decoration: underline;
+                    align-self: center;
+                }
+
+                .button {
+                    border-radius: 0 0 $boxBorderRadius $boxBorderRadius;
+                    margin: 0;
+                    border-top: none;
+                    background: rgba(255,255,255,0.3);
+
+                    &:hover {
+                        background: rgba(255,255,255,0.1);
+                    }
+                }
+
+                .mapPreviewWrapper {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                .settingblock {
+                    display: flex;
+                    flex-direction: column;
+                    background: $boxBackground;
+                    border: 2px solid #fff;
+                    border-radius: $boxBorderRadius $boxBorderRadius 0 0;
+                    padding: 10px;
+                    margin: 15px 0 0;
+
+                    .settingWrapper {
+                        margin: 5px 0;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        label {
+                            flex: 2;
+                            text-align: center;
+                        }
+
+                        .rangeValue {
+                            flex: 0.75;
+                            text-align: center;
+                        }
+
+                        input {
+                            flex: 5;
+                            color: #000 !important;
+
+                            &[type=range] {
+                                -webkit-appearance: none;
+                                width: 100%;
+                                height: 25px;
+                                background: #d3d3d3;
+                                outline: none;
+                                opacity: 0.7;
+                                -webkit-transition: 0.2s;
+                                transition: opacity 0.2s;
+
+                                &:hover {
+                                    opacity: 1;
+                                }
+
+                                &::-webkit-slider-thumb {
+                                    -webkit-appearance: none;
+                                    appearance: none;
+                                    width: 25px;
+                                    height: 30px;
+                                    background: #4CAF50;
+                                    cursor: pointer;
+                                }
+
+                                &::-moz-range-thumb {
+                                    width: 25px;
+                                    height: 30px;
+                                    background: #4CAF50;
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .mainPane {
+            display: inherit;
+            flex-direction: column;
+            padding: 0 10px;
+
+            .actionsWrapper {
+                display: flex;
+                flex: 0.5;
+                margin: 10px 0;
+                justify-content: space-between;
+
+                .menuWrapperLeft {
+                    display: flex;
+                    justify-content: flex-start;
+                }
+
+                .menuWrapperRight {
+                    display: flex;
+                    justify-content: flex-end;
+                }
+            }
+
+            .CanvasWrapper3D {
+                display: flex;
+                flex: 5;
+                justify-content: center;
+                margin: 20px;
+
+                img {
+                    max-width: 100%;
+                    max-height: 500px;
+                    display: block;
+                    width: auto;
+                    height: auto;
+                }
+            }
+
+            .assetWrapper {
+                display: flex;
+                flex: 2.5;
+                align-self: flex-end;
+                border: 2px solid black;
+                margin: 0 20px;
+                justify-content: space-between;
+                border-radius: $boxBorderRadius +3px;
+                max-width: 1000px;
+
+                .scrollLeft {
+                    border-radius: $boxBorderRadius 0 0 $boxBorderRadius;
+                }
+
+                .scrollRight {
+                    border-radius: 0 $boxBorderRadius $boxBorderRadius 0;
+                }
+
+                .scrollLeft,
+                .scrollRight {
+                    width: 40px;
+                    background-color: rgba(255,255,255,0.3);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &:hover {
+                        background: rgba(255,255,255,0.1);
+                    }
+
+                    .label {
+                        transform: rotate(90deg);
+                    }
+                }
+
+                .assetWrapperOverflow {
+                    overflow: hidden;
+                    background-color: $boxBackground;
+
+                    .assetScrollPanel {
+                        transition: all 500ms cubic-bezier(0.875, -0.280, 0.600, 1.505);
+                        display: flex;
+                        justify-content: flex-start;
+                        position: relative;
+                        padding: 20px 0;
+                        left: 0;
+                        height: 100%;
+                        .selected {
+                            box-shadow: yellow;
+                            box-shadow: 0px 0px 13px 10px rgba(255, 240, 62, 0.85);
+                        }
+
+                        .assetItemWrapper {
+                            margin: 0 10px;
+                            border: 2px solid white;
+                            border-radius: $boxBorderRadius+3px;
+                            max-width: 129px;
+                            display: inherit;
+                            flex-direction: column;
+
+                            .assetImage {
+                                display: inherit;
+
+                                img {
+                                    border-radius: $boxBorderRadius $boxBorderRadius 0 0;
+                                }
+                            }
+
+                            .assetName {
+                                display: inherit;
+                                flex: 1;
+                                height: 30px;
+                                justify-content: center;
+                                text-align: center;
+
+                                span {
+                                    align-self: center;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

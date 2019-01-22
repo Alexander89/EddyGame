@@ -1,0 +1,101 @@
+* { font-family: "Comic Sans MS"; font-size: 12pt; margin: 0; padding: 0; color: #fff; box-sizing: border-box; }
+
+.button { text-align: center; padding: 5px 10px; border: 3px solid white; background-color: rgba(0, 0, 0, 0.5); color: white; padding: 10px; border-radius: 15px; white-space: nowrap; margin: 0 5px; }
+
+.button:hover { background: rgba(0, 0, 0, 0.3); }
+
+body { background: url("../img/eddyMap.png"); background-attachment: fixed; background-size: 100%; }
+
+body #overlay { padding-top: 75px; transition: visibility 0s, opacity 0.5s, linear; visibility: hidden; opacity: 0; background-color: rgba(0, 0, 0, 0.8); position: absolute; display: flex; justify-content: center; align-items: flex-start; width: 100%; }
+
+body #overlay.visible { visibility: visible; opacity: 1; }
+
+body #overlay .loadingOverlayContent { display: flex; flex-direction: column; width: 500px; background: #222; border-radius: 10px; border: 3px solid #fff; color: #fff; padding: 10px; }
+
+body #overlay .loadingOverlayContent .mapItemScroll { max-height: 310px; overflow-y: auto; padding: 0 5px; }
+
+body #overlay .loadingOverlayContent .mapItemScroll .mapItem { border: 1px solid #fff; margin: 10px 0; display: flex; flex-direction: row; align-items: center; justify-content: space-between; }
+
+body #overlay .loadingOverlayContent .mapItemScroll .mapItem .mapImage { margin: 5px; }
+
+body #overlay .loadingOverlayContent .mapItemScroll .mapItem .mapInfo { display: flex; flex-direction: column; flex: 2; }
+
+body #overlay .loadingOverlayContent .mapItemScroll .mapItem .button { flex: 1; font-size: 12px; border-width: 1px; }
+
+body .contentWrapper { padding-bottom: 20px; display: flex; width: 100%; }
+
+@media screen and (max-width: 1000px) { body .contentWrapper { flex-direction: column-reverse; } }
+
+body .contentWrapper .settingsPane { align-self: stretch; display: inherit; flex-direction: column; margin: 0 10px; }
+
+body .contentWrapper .settingsPane .optionsWrapper { display: flex; justify-content: flex-start; }
+
+body .contentWrapper .settingsPane .optionsWrapper .button { margin: 10px 5px; }
+
+body .contentWrapper .settingsPane .settingsWrapper { display: flex; flex-direction: column; }
+
+body .contentWrapper .settingsPane .settingsWrapper h2 { margin: 5px 0; font-size: 18px; text-decoration: underline; align-self: center; }
+
+body .contentWrapper .settingsPane .settingsWrapper .button { border-radius: 0 0 10px 10px; margin: 0; border-top: none; background: rgba(255, 255, 255, 0.3); }
+
+body .contentWrapper .settingsPane .settingsWrapper .button:hover { background: rgba(255, 255, 255, 0.1); }
+
+body .contentWrapper .settingsPane .settingsWrapper .mapPreviewWrapper { display: flex; justify-content: center; }
+
+body .contentWrapper .settingsPane .settingsWrapper .settingblock { display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.5); border: 2px solid #fff; border-radius: 10px 10px 0 0; padding: 10px; margin: 15px 0 0; }
+
+body .contentWrapper .settingsPane .settingsWrapper .settingblock .settingWrapper { margin: 5px 0; display: flex; justify-content: space-between; align-items: center; }
+
+body .contentWrapper .settingsPane .settingsWrapper .settingblock .settingWrapper label { flex: 2; text-align: center; }
+
+body .contentWrapper .settingsPane .settingsWrapper .settingblock .settingWrapper .rangeValue { flex: 0.75; text-align: center; }
+
+body .contentWrapper .settingsPane .settingsWrapper .settingblock .settingWrapper input { flex: 5; color: #000 !important; }
+
+body .contentWrapper .settingsPane .settingsWrapper .settingblock .settingWrapper input[type=range] { -webkit-appearance: none; width: 100%; height: 25px; background: #d3d3d3; outline: none; opacity: 0.7; -webkit-transition: 0.2s; transition: opacity 0.2s; }
+
+body .contentWrapper .settingsPane .settingsWrapper .settingblock .settingWrapper input[type=range]:hover { opacity: 1; }
+
+body .contentWrapper .settingsPane .settingsWrapper .settingblock .settingWrapper input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 25px; height: 30px; background: #4CAF50; cursor: pointer; }
+
+body .contentWrapper .settingsPane .settingsWrapper .settingblock .settingWrapper input[type=range]::-moz-range-thumb { width: 25px; height: 30px; background: #4CAF50; cursor: pointer; }
+
+body .contentWrapper .mainPane { display: inherit; flex-direction: column; padding: 0 10px; }
+
+body .contentWrapper .mainPane .actionsWrapper { display: flex; flex: 0.5; margin: 10px 0; justify-content: space-between; }
+
+body .contentWrapper .mainPane .actionsWrapper .menuWrapperLeft { display: flex; justify-content: flex-start; }
+
+body .contentWrapper .mainPane .actionsWrapper .menuWrapperRight { display: flex; justify-content: flex-end; }
+
+body .contentWrapper .mainPane .CanvasWrapper3D { display: flex; flex: 5; justify-content: center; margin: 20px; }
+
+body .contentWrapper .mainPane .CanvasWrapper3D img { max-width: 100%; max-height: 500px; display: block; width: auto; height: auto; }
+
+body .contentWrapper .mainPane .assetWrapper { display: flex; flex: 2.5; align-self: flex-end; border: 2px solid black; margin: 0 20px; justify-content: space-between; border-radius: 13px; max-width: 1000px; }
+
+body .contentWrapper .mainPane .assetWrapper .scrollLeft { border-radius: 10px 0 0 10px; }
+
+body .contentWrapper .mainPane .assetWrapper .scrollRight { border-radius: 0 10px 10px 0; }
+
+body .contentWrapper .mainPane .assetWrapper .scrollLeft, body .contentWrapper .mainPane .assetWrapper .scrollRight { width: 40px; background-color: rgba(255, 255, 255, 0.3); display: flex; align-items: center; justify-content: center; }
+
+body .contentWrapper .mainPane .assetWrapper .scrollLeft:hover, body .contentWrapper .mainPane .assetWrapper .scrollRight:hover { background: rgba(255, 255, 255, 0.1); }
+
+body .contentWrapper .mainPane .assetWrapper .scrollLeft .label, body .contentWrapper .mainPane .assetWrapper .scrollRight .label { transform: rotate(90deg); }
+
+body .contentWrapper .mainPane .assetWrapper .assetWrapperOverflow { overflow: hidden; background-color: rgba(0, 0, 0, 0.5); }
+
+body .contentWrapper .mainPane .assetWrapper .assetWrapperOverflow .assetScrollPanel { transition: all 500ms cubic-bezier(0.875, -0.28, 0.6, 1.505); display: flex; justify-content: flex-start; position: relative; padding: 20px 0; left: 0; height: 100%; }
+
+body .contentWrapper .mainPane .assetWrapper .assetWrapperOverflow .assetScrollPanel .selected { box-shadow: yellow; box-shadow: 0px 0px 13px 10px rgba(255, 240, 62, 0.85); }
+
+body .contentWrapper .mainPane .assetWrapper .assetWrapperOverflow .assetScrollPanel .assetItemWrapper { margin: 0 10px; border: 2px solid white; border-radius: 13px; max-width: 129px; display: inherit; flex-direction: column; }
+
+body .contentWrapper .mainPane .assetWrapper .assetWrapperOverflow .assetScrollPanel .assetItemWrapper .assetImage { display: inherit; }
+
+body .contentWrapper .mainPane .assetWrapper .assetWrapperOverflow .assetScrollPanel .assetItemWrapper .assetImage img { border-radius: 10px 10px 0 0; }
+
+body .contentWrapper .mainPane .assetWrapper .assetWrapperOverflow .assetScrollPanel .assetItemWrapper .assetName { display: inherit; flex: 1; height: 30px; justify-content: center; text-align: center; }
+
+body .contentWrapper .mainPane .assetWrapper .assetWrapperOverflow .assetScrollPanel .assetItemWrapper .assetName span { align-self: center; }

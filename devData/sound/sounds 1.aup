@@ -1,0 +1,53 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="sounds 1_data" version="1.3.0" audacityversion="2.0.5" sel0="0.0000000000" sel1="0.5660000000" vpos="0" h="0.0000000000" zoom="408.3088543852" rate="96000.0">
+	<tags/>
+	<wavetrack name="250133__fngersounds__egg-cracking" channel="0" linked="1" mute="1" solo="0" height="150" minimized="0" isSelected="0" rate="96000" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="97056">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000c84.au" len="97056" min="-1.0" max="0.999969" rms="0.082388"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="250133__fngersounds__egg-cracking" channel="1" linked="0" mute="1" solo="0" height="150" minimized="0" isSelected="0" rate="96000" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="97056">
+				<waveblock start="0">
+					<simpleblockfile filename="e000016c.au" len="97056" min="-1.0" max="0.999969" rms="0.084343"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Tonspur" channel="0" linked="1" mute="0" solo="1" height="150" minimized="0" isSelected="1" rate="96000" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="524288" sampleformat="131073" numsamples="54336">
+				<waveblock start="0">
+					<simpleblockfile filename="e000069a.au" len="54336" min="-0.054596" max="0.05484" rms="0.001974"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="3">
+				<controlpoint t="0.054426515930" val="0.763888895512"/>
+				<controlpoint t="0.188835560123" val="0.708333313465"/>
+				<controlpoint t="0.359431654676" val="0.888888895512"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Tonspur" channel="1" linked="0" mute="0" solo="1" height="150" minimized="0" isSelected="1" rate="96000" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="524288" sampleformat="131073" numsamples="54336">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000e00.au" len="54336" min="-0.075562" max="0.079681" rms="0.002645"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="3">
+				<controlpoint t="0.054426515930" val="0.763888895512"/>
+				<controlpoint t="0.188835560123" val="0.708333313465"/>
+				<controlpoint t="0.359431654676" val="0.888888895512"/>
+			</envelope>
+		</waveclip>
+	</wavetrack>
+</project>

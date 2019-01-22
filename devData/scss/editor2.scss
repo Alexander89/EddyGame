@@ -1,0 +1,432 @@
+$boxBorderRadius: 15px;
+$mediaQueryWidth: 1023px;
+
+body * {
+    display: inherit; 
+} 
+
+datalist, head {
+    display: none;
+}
+
+body {
+    background: url("../img/eddyMap.png");
+    background-attachment: fixed;
+    background-size: 100%;
+    min-width: 550px;
+    margin: 0;
+    padding: 0;
+    font-family: "Comic Sans MS";
+    font-size: 1.2em;
+    color: #fff;
+
+    .content {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: row;
+        @media screen and (max-width: $mediaQueryWidth) {
+            flex-direction: column;
+        }
+
+        .sidebar {
+            flex: 1;
+            flex-direction: column;
+            // background: green;
+            padding: 0 20px;
+            @media screen and (max-width: $mediaQueryWidth) {
+                flex-basis: 100%;
+            }
+
+            .sidebarBlock {
+                margin: 10px 0;
+                flex-direction: column;
+                justify-content: center;
+                padding: 5px 10px;
+                border-radius: $boxBorderRadius;
+
+                h2 {
+                    margin: 5px 0;
+                    font-size: 1em;
+                }
+
+                input {
+                    flex: 5;
+                    color: #000 !important;
+
+                    &[type=range] {
+                        -webkit-appearance: none;
+                        width: 100%;
+                        height: 25px;
+                        background: #d3d3d3;
+                        outline: none;
+                        opacity: 0.7;
+                        -webkit-transition: 0.2s;
+                        transition: opacity 0.2s;
+
+                        &:hover {
+                            opacity: 1;
+                        }
+
+                        &::-webkit-slider-thumb {
+                            -webkit-appearance: none;
+                            appearance: none;
+                            width: 25px;
+                            height: 30px;
+                            background: #4CAF50;
+                            cursor: pointer;
+                        }
+
+                        &::-moz-range-thumb {
+                            width: 25px;
+                            height: 30px;
+                            background: #4CAF50;
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                &#settingsButtons {
+                    justify-content: space-between;
+                    // background: none;
+                    border-radius: 0;
+                    flex-direction: row;
+                    align-items: center;
+                    flex-basis: 50px;
+                    margin-top: 0;
+                    padding: 5px 0;
+
+                    .button {
+                        margin: 0 2px;
+                    }
+                }
+
+                &#mapPreview {
+                    justify-content: center;
+                    align-items: center;
+
+                    img {
+                        max-height: 100%;
+                        max-width: 100%;
+                    }
+                }
+
+                .settingWrapper {
+                    margin: 5px 0;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    input[type=text] {
+                        padding: 5px;
+                        margin-left: 5px;
+                    }
+
+                    label {
+                        flex: 2;
+                        text-align: center;
+                    }
+
+                    .rangeValue {
+                        flex: 0.75;
+                        text-align: center;
+                        justify-content: center;
+                        font-size: 0.8em;
+                    }
+                }
+
+                &#fieldSettings {}
+
+                &#mapSettings {
+                    // display: none;
+                }
+            }
+        }
+
+        .mainContent {
+            flex: 2;
+            flex-direction: column;
+            // background: blue;
+            padding: 0 20px;
+            align-items: center;
+            @media screen and (max-width: $mediaQueryWidth) {
+                padding: 20px;
+                flex-basis: 100%;
+                flex: auto;
+            }
+
+            .mainContentBlock {
+                margin: 10px 0;
+                width: 100%;
+
+                &#menuButtons {
+                    justify-content: space-between;
+                    align-items: center;
+                    flex-basis: 50px;
+                    margin-top: 0;
+                    padding: 5px 0;
+
+                    .button {
+                        margin: 0 2px;
+                    }
+                }
+
+                &#previewPanel {
+                    flex: 1;
+                    flex-basis: 350px;
+                    // REVIEW: should we limit this previewContainer to a max height?
+                    // max-height: 500px;
+                }
+
+                &#assetPanel {
+                    flex-basis: 180px;
+                    border-radius: $boxBorderRadius +3px;
+
+                    .assetWrapper {
+                        justify-content: space-between;
+                        flex-basis: 100%;
+
+                        .scrollLeft,
+                        .scrollRight {
+                            width: 40px;
+                            align-items: center;
+                            justify-content: center;
+                            background-color: rgba(0,0,0,0.5);
+
+                            &:hover {
+                                background-color: rgba(0,0,0,0.8);
+                            }
+
+                            .label {
+                                transform: rotate(90deg);
+                            }
+                        }
+
+                        .scrollLeft {
+                            border-radius: $boxBorderRadius 0 0 $boxBorderRadius;
+                            border-right: 3px solid #fff;
+                        }
+
+                        .scrollRight {
+                            border-left: 3px solid #fff;
+                            border-radius: 0 $boxBorderRadius $boxBorderRadius 0;
+                        }
+
+                        .assetOverflowWrapper {
+                            overflow: hidden;
+                            flex-basis: 100%;
+
+                            .assetScrollPanel {
+                                transition: all 250ms cubic-bezier(0.875, -0.280, 0.600, 1.505);
+                                display: flex;
+                                justify-content: flex-start;
+                                position: relative;
+                                left: 0;
+                                min-height: 120px;
+                                max-width: 0;
+                                
+                                .selected {
+                                    box-shadow: yellow;
+                                    box-shadow: 0px 0px 13px 10px rgba(255, 240, 62, 0.85);
+                                }
+
+                                .assetItemWrapper {
+                                    border-radius: 15px;
+                                    border: 2px solid;
+                                    flex-direction: column;
+                                    justify-content: center;
+                                    align-items: center;
+                                    margin: 10px;
+                                    background: rgba(0,0,0,0.4);
+
+                                    .assetImage {
+                                        flex: 80px;
+
+                                        img {
+                                            border-radius: 12px 12px 0 0;
+                                            height: auto;
+                                            width: auto;
+                                        }
+                                    }
+
+                                    .assetName {
+                                        align-items: center;
+                                        flex: 30px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #overlay {
+        transition: visibility 0s, opacity 0.5s, linear;
+        visibility: hidden;
+        opacity: 0;
+        background-color: rgba(0,0,0,0.8);
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        z-index: 1;
+
+        input[type="text"] {
+            padding: 5px;
+            font-family: inherit;
+            margin: 2px 0;
+        }
+
+        h1,
+        h2 {
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 1.2em;
+        }
+
+        h2 {
+            font-size: 1.05em;
+        }
+
+        &.visible {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        #closeButton {
+            text-align: center;
+        }
+
+        .overlayContent {
+            display: none;
+            flex-direction: column;
+            width: 500px;
+            background: #222;
+            border-radius: $boxBorderRadius;
+            border: 3px solid #fff;
+            color: #fff;
+            padding: 10px;
+            margin-top: 75px;
+
+            .overlayHeader {
+                justify-content: center;
+            }
+
+            .overlayFooter {
+                flex: 1;
+
+                .button {
+                    flex: 1;
+
+                    &:last-child {
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+
+        #loadingOverlayContent {
+            .mapItemScroll {
+                max-height: 310px;
+                overflow-y: auto;
+                flex-direction: column;
+                padding: 5px;
+
+                .mapItem {
+                    border: 1px solid #fff;
+                    margin-bottom: 5px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                    background: lighten(#000, 40%);
+
+                    &.selectedMap {
+                        background: lighten(#000, 75%);
+                        color: lighten(#000, 10%);
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+
+                    .mapImage {
+                        margin: 5px;
+                    }
+
+                    .mapInfo {
+                        display: flex;
+                        flex-direction: column;
+                        margin-left: 10px;
+                        flex: 2;
+
+                        span {
+                            font-size: 0.7em;
+                        }
+                    }
+
+                    .button {
+                        flex: 1;
+                        font-size: 12px;
+                        border-width: 1px;
+                        margin: 0 10px;
+                    }
+                }
+            }
+        }
+
+        #savingOverlayContent {
+            .saveMapForm {
+                flex-direction: column;
+                margin-bottom: 10px;
+
+                .formelement {
+                    margin: 5px 0;
+                    flex-direction: column;
+                    justify-content: flex-end;
+
+                    &.checkbox {
+                        align-items: center;
+                        flex-direction: row-reverse;
+
+                        label {
+                            margin-left: 10px;
+                        }
+                    }
+
+                    label {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.roundedBox {
+    overflow: hidden;
+    border-radius: $boxBorderRadius;
+    border: 3px solid #fff;
+    background: rgba(0,0,0,0.5);
+}
+
+.button {
+    text-align: center;
+    justify-content: center;
+    padding: 10px 5px;
+    border: 2px solid white;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border-radius: 15px;
+    font-size: 0.75em;
+    white-space: nowrap;
+
+    &:hover {
+        cursor: pointer;
+        background: rgba(0,0,0,0.8);
+    }
+}

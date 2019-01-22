@@ -1,0 +1,6 @@
+#sftp Alex
+sftp-config.json
+
+#docker Andi
+.DS_Store
+mainfest.json

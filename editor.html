@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>flexbox test</title>
+  <link rel="stylesheet" href="css/editor2.css">
+  <script type="text/javascript" src="sgl/gl-matrix.js"></script>
+
+  <script type="text/javascript" src="sgl/smartGl.js"></script>
+  <script type="text/javascript" src="sgl/sGL_Transform.js"></script>
+  <script type="text/javascript" src="sgl/sGL_Maths.js"></script>
+  <script type="text/javascript" src="sgl/sGL_Collision.js"></script>
+  <script type="text/javascript" src="sgl/sGL_Shader.js"></script>
+  <script type="text/javascript" src="sgl/sGL_Camera.js"></script>
+  <script type="text/javascript" src="sgl/sGL_Input.js"></script>
+  <script type="text/javascript" src="sgl/sGL_Modal.js"></script>
+  <script type="text/javascript" src="sgl/sGL_Light.js"></script>
+  <script type="text/javascript" src="sgl/sGL_Ui.js"></script>
+  <script type="text/javascript" src="sgl/sGL_Audio.js"></script>
+  <script type="text/javascript" src="sgl/sGL_Primitives.js"></script>
+  <script type="text/javascript" src="sgl/sGL_Scene.js"></script>
+
+  <script type="text/javascript" src="js/editor.js"></script>
+  <script type="text/javascript" src="js/lvl.js"></script>
+  <script type="text/javascript" src="js/effectItem.js"></script>
+</head>
+
+<body>
+  <div id="overlay">
+    <div class="overlayContent" id="loadingOverlayContent">
+      <div class="overlayHeader">
+        <h1>Karte laden</h1>
+      </div>
+      <div id="mapLoadContrainer" class="mapItemScroll">
+        <div class="mapItem" onclick="selectNewMap(this);">
+          <img class="mapImage" src="img/newMap_s.png" alt="New Map" class="mapImage">
+          <div class="mapInfo"><h2>Neue Karte</h2></div>
+        </div>        
+      </div>
+      <div class="overlayFooter">
+        <div id="closeButton" class="button" onclick="closePopup()">Abbrechen</div>
+        <div id="loadButton" class="button" onclick="loadMap()">Laden</div>
+      </div>
+    </div>
+    <div class="overlayContent" id="savingOverlayContent">
+      <div class="overlayHeader">
+        <h1>Map speichern</h1>
+      </div>
+      <div class="saveMapForm">
+        <div class="formelement">
+          <label for="mapname">Name</label>
+          <input type="text" name="mapname">
+        </div>
+        <div class="formelement">
+          <label for="mapdescription">Beschreibung</label>
+          <input type="text" name="mapdescription">
+        </div>
+        <div class="formelement">
+          <label for="mapauthor">Autor</label>
+          <input type="text" name="mapauthor">
+        </div>
+        <div class="formelement">
+          <label for="mapversion">Version</label>
+          <input type="text" name="mapversion">
+        </div>
+        <div class="formelement checkbox">
+          <label for="">Lorem ipsum dolor sit amet.</label>
+          <input type="checkbox" name="">
+        </div>
+        <div class="formelement checkbox">
+          <label for="">Lorem ipsum dolor sit amet.</label>
+          <input type="checkbox" name="">
+        </div>
+      </div>
+      <div class="overlayFooter">
+        <div id="closeButton" class="button" onclick="closePopup()">Abbrechen</div>
+        <div id="saveButton" class="button" onclick="saveMap()">Speichern</div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="sidebar">
+      <div class="sidebarBlock" id="settingsButtons">
+        <div class="buttonsLeft">
+          <div class="button" onclick="komplett()">Komplett</div>
+          <div class="button" onclick="height()">Höhe</div>
+          <div class="button" onclick="type()">Feldtype</div>
+          <div class="button" onclick="spezial()">Spezial</div>
+        </div>
+        <div class="buttonsLeft">
+          <div class="button" onclick="allgemein()">Allgemein</div>
+        </div>
+        <div class="buttonsRight">
+          <div class="button">Assets</div>
+        </div>
+      </div>
+      <div class="sidebarBlock roundedBox" id="mapPreview">
+        <canvas id="pixMap" ></canvas>
+        <canvas id="rawDataMap" style="display:none;" ></canvas>
+      </div>
+      <div class="sidebarBlock roundedBox" id="fieldSettings">
+        <h2>Feldeinstellungen:</h2>
+        <div class="settingWrapper" id="settingHeight">
+          <label for="height">Höhe:</label>
+          <span class="rangeValue">0</span>
+          <input type="range" step="1" min="-80" value="0" max="130" name="height" id="heightRange" oninput="showRangeValue(this);">
+        </div>
+        <div class="settingWrapper" id="settingType">
+          <label for="fieldType">Feldtyp</label>
+          <!--<input id="fieldType" autocomplete="off" value="Gras" type="text" list="fieldTypes" name="fieldType">-->
+          <select id="fieldType" iid="fieldTypes">
+            <option value="Gras"> Gras </option>
+            <option value="Schlamm"> Schlamm </option>
+            <option value="Lava"> Lava </option>
+            <option value="Battery"> Battery </option>
+            <option value="Booster"> Booster </option>
+            <option value="Leben"> Leben </option>
+            <option value="Unsichtbar"> Unsichtbar </option>
+          </select>
+        </div>
+        <div class="settingWrapper" id="settingSpezial">
+          <label for="spezialFieldType">Spezialfeld</label>
+          <input id="spezialField" autocomplete="off" type="text" list="spezialFieldTypes" name="spezialFieldType">
+          <datalist id="spezialFieldTypes">
+            <option value="Start Spieler ">
+          </datalist>
+        </div>
+      </div>
+      <div class="sidebarBlock roundedBox" id="mapSettings">
+        <h2>Karteneinstellungen:</h2>
+        <div class="settingWrapper">
+          <label for="width">Breite:</label>
+          <span class="rangeValue">30</span>
+          <input type="range" step="1" min="12" max="40" value="30" name="width" id="widhtRange" oninput="showRangeValue(this);">
+        </div>
+        <div class="settingWrapper">
+          <label for="length">Länge:</label>
+          <span class="rangeValue">30</span>
+          <input type="range" step="1" min="12" max="40" value="30" name="length" id="lengthRange" oninput="showRangeValue(this);">
+        </div>
+        <div class="settingWrapper">
+          <label for="fieldsize">Feldgröße:</label>
+          <span class="rangeValue">3</span>
+          <input type="range" step="0.1" min="1.5" value="3" max="4.5" name="fieldsize" id="fieldsizeRange" oninput="showRangeValue(this);">
+        </div>
+        <h2>Sonneneinstellungen:</h2>
+        <div class="settingWrapper">
+          <label for="sunAngle">Stand:</label>
+          <span class="rangeValue">08:45</span>
+          <input type="range" step="1" min="0" max="22" name="sunAngle" id="sunangle" oninput="showRangeValue(this);">
+        </div>
+        <div class="settingWrapper">
+          <label for="sunDirection">Richtung:</label>
+          <span class="rangeValue">0 &deg;</span>
+          <input type="range" value="0" step="5" min="0" max="360" name="sunDirection" id="sundirection" oninput="showRangeValue(this);">
+        </div>
+      </div>
+    </div>
+    <div class="mainContent">
+      <div class="mainContentBlock" id="menuButtons">
+        <div class="buttonsLeft">
+          <div class="button">Fliegen</div>
+          <div class="button">Laufen</div>
+        </div>
+        <div class="buttonsRight">
+          <div id="makeMapButton" class="button">Neue Map</div>
+          <div id="loadMapButton" class="button">Laden</div>
+          <div class="button" onclick="openPopup('save');">Speichern</div>
+          <div class="button">Prüfen</div>
+          <div class="button">Zum Menü</div>
+        </div>
+      </div>
+      <div class="mainContentBlock roundedBox" id="previewPanel">
+        <canvas id="c3DView" style="width: 100%; height: 100%"></canvas>
+      </div>
+      <div class="mainContentBlock roundedBox" id="assetPanel">
+        <div class="assetWrapper">
+          <div class="scrollLeft" onclick="scrollAssetLeft();">
+            <div class="label">LEFT</div>
+          </div>
+          <div class="assetOverflowWrapper">
+            <div class="assetScrollPanel">
+              <div class="assetItemWrapper" onclick="toogleAsset(1);">
+                <div class="assetImage">
+                  <img src="http://via.placeholder.com/125?text=Asset" alt="">
+                </div>
+                <div class="assetName">
+                  <span>AssetName</span>
+                </div>
+              </div>
+              <div class="assetItemWrapper" onclick="toogleAsset(2);">
+                <div class="assetImage">
+                  <img src="http://via.placeholder.com/125?text=Asset" alt="">
+                </div>
+                <div class="assetName">
+                  <span>AssetName</span>
+                </div>
+              </div>
+              <div class="assetItemWrapper" onclick="toogleAsset(3);">
+                <div class="assetImage">
+                  <img src="http://via.placeholder.com/125?text=Asset" alt="">
+                </div>
+                <div class="assetName">
+                  <span>AssetName</span>
+                </div>
+              </div>
+              <div class="assetItemWrapper" onclick="toogleAsset(4);">
+                <div class="assetImage">
+                  <img src="http://via.placeholder.com/125?text=Asset" alt="">
+                </div>
+                <div class="assetName">
+                  <span>AssetName</span>
+                </div>
+              </div>
+              <div class="assetItemWrapper" onclick="toogleAsset(5);">
+                <div class="assetImage">
+                  <img src="http://via.placeholder.com/125?text=Asset" alt="">
+                </div>
+                <div class="assetName">
+                  <span>AssetName</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="scrollRight" onclick="scrollAssetsRight();">
+            <div class="label">RIGHT</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

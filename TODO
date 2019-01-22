@@ -1,0 +1,195 @@
+Release 1
+19.11.2017   (fertig) 49   (open) 25 
+23.11.2017   (fertig) 66   (open) 22 
+24.11.2017   (fertig) 75   (open) 19
+24.11.2017   (fertig) 82   (open) 16
+26.11.2017   (fertig) 98   (open) 8
+Release 2
+
+SKILL:
+  (DONE) Taschenlampe leuchtdauer (verbrauch) (Battery)
+  (DONE) Lauf geschwindigkeit (pfeile vom boden)
+  (DONE) Rotationsgeschwindichkeit ( Eddy + Pfeile)
+  (DONE) Taschenlampe Helligkeit (Taschenlampe)
+  (DONE) Versteckdauer  (Auge)
+  (DONE) Anzahl des Max-Lebens (Herz verwenden)
+  (    ) Kleines I bei skills
+  (DONE) Funktion zum setzen der skillsettings.
+  (DONE) Skilleinstellungen in eddy extrahieren
+  (DONE) Skills errechnen aus gesetzten Punkt
+  (DONE) Wert der skills setzen
+  (DONE) Skills über netzwerk Verteilen, sonst sind hide effecte nur local...
+
+ZUSATZFELDER:
+  (DONE) Felder zum aufladen vom Verstecken 
+  (DONE) Felder zum Lampe aufladen 
+  (DONE) Felder Leben aufladen 
+  (DONE) Felder für schnelles laufen 
+
+SERVER:
+  (DONE) manchmal ist noch das letzte ergenis aktiv
+  (DONE) Result verlassen, muss wieder in Wartet stellen
+  (DONE) Reputation und erfahrung anpassen
+  (DONE) Userdatenbank hat nicht funktioniert.
+  (DONE) Speichern der Userdaten über ein Zeitglied.
+  (DONE) Map auswahl
+  (DONE) Map abstimmung
+  (DONE) Chat kommt mit umlauten noch nicht klar (UTF-8 ?) (std::setLocal(LC_ALL, "en_US.utf8") Fixed it in Thread)
+  (DONE) Wenn alle spieler beim anzählen abhauen, kann die Session vergessen werden
+  (DONE) Wenn bei der abstimmung jemand den raum verlässt, wird dessen stime als Ja gewertet
+  (DONE) Feedback verarbeiten
+  (DONE) Skills verteilen
+  (DONE) Startpostizionen festlegen
+  (DONE) Bei wechselnden startpositionen kann es pasieren, dass eddy gleich gefangen wurde
+
+UI:
+  (DONE) Verstecken UI anpassen
+  (DONE) Room sprache auf deutsch anpassen
+  (DONE) Menü nur aktive wenn angemeldet
+  (DONE) Systemmeldungen
+    (DONE) wenn jemand gefangen wurde
+    (DONE) wenn jemand gestorben ist
+    (DONE) wenn Camperprotection
+    (DONE) beim Spiel Start
+  (DONE) Durchlaufende Meldung 
+    (DONE) bei localer startenden Camperprotection + Warnung davor
+  (DONE) Verläst jemand das Menü un der Rest ist aber breit, so muss der countdown starten
+  (DONE) timeout bei serverliste zum reload (auf scroll aufpassen)
+  (DONE) Lvl info ist nicht erkennbar dass ess da mehr infos gibt, ebenso fehlt ein schließen butten 
+  (DONE) Lvl Auswahl ( jeder kann, doch dann wird der gruppe dies als vorschlag gemacht, eine Mehrheit muss zustimmen 50:50 = nein)
+    (DONE) LVL Auswahl Fenster mit infos über die Auswahl
+    (DONE) Neue Map an Mitspieler verteilen
+    (DONE) Abstimm abfrage bei allen im raum ( timer 10 Sec sonst:"JA" )
+    (DONE) Anzahl der slots anpassen
+    (DONE) Überschüssige spieler Kicken
+  (DONE) Meldungen für timeout integrieren
+  (DONE) Timeout oben in der Mitte positionieren
+  (DONE) timeout chat infos kommen nicht an ==> das war ja garnicht der Chat
+  (DONE) Timeout Sec und ms mit pad 3 formatiert
+  (DONE) ingame Menue ESC
+    (DONE) Über controller steuern
+    (DONE) Zurück zum Menü (eine Nachricht senden um den Spieler aus dem Spiel zu nehmen)
+    (DONE) Weiter Spielen
+    (DONE) Audio
+    (    ) Graphic Einstellungen (nur canvas große, rest muss extern eingestellt werden)
+    (    ) Steuerung
+  (DONE) Server raum muss nochmal optisch aufgeräumt werden
+  (DONE) Feedback: Formular erstellen
+  (    ) Controller und keyboard mapping mauell eingebbar
+    (    ) Oberfläche zum anpassen
+    (    ) Mapping speichern/ laden
+  (DONE) checkbox UI erstellen
+
+  RESULT:
+    (DONE) Ergebnisse sind noch nicht richtig. wenn gesuchter nicht gestorben oder gefangen wurde
+    (DONE) Ergebnis geht nicht, wenn sucher das spiel verlassen hat, evtl merken und die infos rein schreiben,
+    (DONE) Ergebnis anpassen mit infos, ob und wann ein spieler das spiel verlassen hat
+    (DONE) Ergebnis style in der playerliste, da müssen noch abstände angepasst werden.
+    (DONE) neuer Hintergrund für result integrieren
+
+GAMEPLAY:
+  (DONE) Laufgeschwindigkeit proporzional zur Framerate 
+  (DONE) Drehen balangsieren und an framerate anpassen (BALACE)
+  (DONE) Verstecken integrieren 
+  (DONE) Verstekter Carakter bewegt sich komisch (view Matrix wurde bei verstekten objecten nicht generiert)
+  (DONE) Effectfelditems platzen beim aufsammeln 
+  (DONE) Taschenlampe läd langsamer dafür größere Battery (BALACE)
+  (DONE) Leben läd langsamer Matsch und Lava anpassen (BALACE)
+  (DONE) Steuerung mit maus & Tastatur ermöglichen
+  (DONE) Localer Eddy bekommt eine sehr leichte Punktlichtquelle, dass man ihm im schatten sieht
+  (DONE) camperprotection wird durchscheinend durch die wände (mit benachrichtigung)
+  (DONE) Startverzögerung bis alle das spiel geladen haben
+  (DONE) Lichter nochmal anpassen
+  (DONE) Timeout im Spiel, irgentwann müssen die Gesuchten auch mal gewonnen haben
+    (DONE) 5Min für ersten + 20sec pro Spieler
+  (DONE) EffectFelder brauchen noch eine andere Textur
+  (DONE) Taschenlampe nicht immer am Spielstart auf start füllung ==> beim 2ten start kam er mit eine, rießen deltaTime in die Berechnung
+  (DONE) Spielstart syncronisieren
+  (DONE) StartPos vom Server erhalten
+  (DONE) Gefangene werden nicht mehr sichtbar
+  (DONE) startwert bei skill 50 / 50
+
+
+
+  MOVEEDDY:
+    (DONE) drehen hat noch einen komischen effect
+    (DONE) ist eddy schneller, kann die camera weiter weg
+    (DONE) beim springen eddy ein bisschen in die länge ziehen
+    (DONE) hinterkopf an der Wand: kamera soll näher kommen. 
+              ( strahl, dann ein requested cam distance setzen die über ne speed da hin gezogen wird ) 
+    (DONE) Collision mit wand über 4 punkte und nicht über einen Zentralen Punkt
+              Das bewegen muss aber noch über den zentralpunkt geschehen
+    (DONE) funktioniert noch nicht so gut, da bei drehungen ein punkt in die wand wandern kann.
+              Besser mit AA punkten arbeiten. +x +y(z)
+    (DONE) move forwars and sidewars in move vector umwandeln und in AA die Bewegung an den Wänden abfragen
+              Besseres Verhalten an den Wänden ohne die Normals zu berechnen
+    (DONE) Camera schneller an neue position bewegen
+    (DONE) Camera strahl muss von eddys kopf und nicht von den füßen los gesendet werden
+    (DONE) Camera beim nach oben und unten schauen sollte sich kreisförmig um Eddy bewegen
+    (DONE) Eddy auf und abbewegung mit einer stetigen phasenverschiebung vom sinus integriert
+
+SYSTEM:
+  (DONE) Clienterkennung um anpassungen für speizelle Geräte zu ermöglichen
+
+MAC:
+  (DONE) geht nicht (sendet keinen start)
+  (    ) Fängt maus nicht
+  (    ) Am anfang nur hell kein schatten berechnet (evtl was mit dem Arc remove Value)
+  (    ) 
+
+AUDIO:
+  (DONE) Audio Classe in smartGl integrieren
+    (DONE) 3DSound positioning
+    (Proc) Lautstärke und reichweite abstimmen
+  (DONE) Schrittgeräusche, in der nähe, aber leise,
+  (DONE) Schrittgeräusche bei hide ausblenden
+  (    ) Erfolgsmeldungen (gefangen) akustisch untermahlen
+  (DONE) Item blob integrieren
+  (DONE) Einstellungen Speichern und laden
+
+
+
+SPÄTER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+IDEE:
+  (  ) Portale?? zum hin und her springen
+  (  ) lärmende gegenstände, bei denen man schritte nicht mehr hört
+  (  ) Partikel effect beim laufen hinter eddy (Graß)
+  (  ) Boden abdrücke von eddy, auf bestimmten Untergründen
+  (  ) Hohes Graß
+  (  ) bewegende Sonne
+  (  ) neue Effectfelder 
+    (  ) Feld was lärm macht
+    (  ) fliegen
+    (  ) hoch springen 
+    (  ) kleiner werden
+    (  ) eddy verdoppeln
+  (  ) Mehrsprachig
+  (  ) ? OBJ-Daten serialisieren ?
+  (  ) OBJ-Daten im Menü runter laden (localstore)
+  MOBILE:
+    (  ) Arc remove Value anpassen um schatteneffecte zu vermeiden.
+    (  ) Onscreen Controler implementiren
+  MAPEDITOR:
+    (  ) Map hochladen. ( wahrscheinlich am bessten über ein canvas )
+    (  ) Map erstellen
+    (  ) Map bearbeiten
+    (  ) Farbkanäle seperat abarbeiten
+    (  ) sonnenlicht über die Map configurieren (MetaData)
+    (  ) Zusätzliche Gegenstände in der Map (MetaData)
+      (  ) (z.b. Absperband) um Fallen. 
+      (  ) Stehlampen (ohne Schatten)
+      (  ) lärmende Gegenstände
+    (  ) 3D flyby vorschau (evtl live)
+      (  ) in 3D höhen anpassen und Felder auswählen
+      (  ) Sterio view um in beiden Dimensionenstupeln zu arbeiten
+      (  ) Mit und ohne Licht
+
+
+
+change CSS 
+
+body #overlay #loadingOverlayContent .mapItemScroll .mapItem .mapImage
+    width: 75px;
+    image-rendering: pixelated;
+
+    höhe festlegen

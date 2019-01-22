@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <title>Smart WebGL 2.0 - Mapeditor</title>
+    <link rel="stylesheet" href="css/editor.min.css">
+    <script type="text/javascript">
+        var assetWidth = 149;
+        var openPopup = function() {
+            document.getElementById('overlay').style.height = document.body.scrollHeight + 'px';
+            document.getElementById('overlay').classList.add('visible');
+        }
+        var closePopup = function() {
+            document.getElementById('overlay').classList.remove('visible');
+        }
+        var scrollAssetLeft = function() {
+            var assetScrollPanel = document.getElementsByClassName('assetScrollPanel')[0];
+            var maxScroll = document.getElementsByClassName('assetItemWrapper').length * assetWidth;
+            var assetScrollPanelLeftInt = assetScrollPanel.style.left.substring(0, assetScrollPanel.style.left.length - 2);
+            var newLeftValue = (assetScrollPanelLeftInt - assetWidth);
+            if(newLeftValue > maxScroll*-1 ){
+                assetScrollPanel.style.left = newLeftValue + "px";
+            }
+        }
+        var scrollAssetsRight = function() {
+            var assetScrollPanel = document.getElementsByClassName('assetScrollPanel')[0];
+            var assetScrollPanelLeftInt = parseInt(assetScrollPanel.style.left.substring(0, assetScrollPanel.style.left.length - 2));
+            if(assetScrollPanelLeftInt != 0){
+                assetScrollPanel.style.left = (assetScrollPanelLeftInt + assetWidth) + "px";
+            }
+        }
+
+        var showRangeValue = function (element){
+            element.parentElement.getElementsByTagName('span')[0].innerHTML = element.value;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="overlay">
+        <div class="overlayContent" id ="loadingOverlayContent">
+            <div class="overlayHeader">
+                <h1>Eigene Maps</h1>
+            </div>
+            <div class="mapItemScroll">
+                <div class="mapItem">
+                    <img class="mapImage" src="http://via.placeholder.com/75px" alt="" class="mapImage">
+                    <div class="mapInfo">
+                        <h2>Mapname</h2>
+                        <span>Datum: 23.11.2017</span>
+                        <span>Version: 0.1</span>
+                    </div>
+                    <div class="button">Bearbeiten</div>
+                </div>
+                <div class="mapItem">
+                    <img class="mapImage" src="http://via.placeholder.com/75px" alt="" class="mapImage">
+                    <div class="mapInfo">
+                        <h2>Mapname</h2>
+                        <span>Datum: 23.11.2017</span>
+                        <span>Version: 0.1</span>
+                    </div>
+                    <div class="button">Bearbeiten</div>
+                </div>
+                <div class="mapItem">
+                    <img class="mapImage" src="http://via.placeholder.com/75px" alt="" class="mapImage">
+                    <div class="mapInfo">
+                        <h2>Mapname</h2>
+                        <span>Datum: 23.11.2017</span>
+                        <span>Version: 0.1</span>
+                    </div>
+                    <div class="button">Bearbeiten</div>
+                </div>
+            </div>
+            <div class="overlayFooter">
+                <div id="closeButton" class="button" onclick="closePopup()">Abbrechen</div>
+            </div>
+        </div>
+    </div>
+    <div class="contentWrapper">
+        <div class="settingsPane">
+            <div class="optionsWrapper">
+                <div class="button">Komplett</div>
+                <div class="button">Höhe</div>
+                <div class="button">Feldtype</div>
+                <div class="button">Spezial</div>
+                <div class="button">Allgemein</div>
+                <div class="button">Assets</div>
+            </div>
+            <div class="settingsWrapper">
+                <div class="mapPreviewWrapper">
+                    <img src="http://via.placeholder.com/350x250?text=Map%20Canvas" alt="MapGeneratorCanvas">
+                </div>
+                <div class="settingblock">
+                    <h2>Feldeinstellungen:</h2>
+                    <div class="settingWrapper">
+                        <label for="height">Höhe:</label>
+                        <input type="range" step="1" min="-127" max="128" name="height" id="heightRange" oninput="showRangeValue(this);">
+                        <span class="rangeValue">0</span>
+                    </div>
+                    <div class="settingWrapper">
+                        <label for="fieldType">Feldtyp</label>
+                        <input autocomplete="off" type="text" list="fieldTypes" name="fieldType">
+                        <datalist id="fieldTypes">
+                            <option value="Gras">
+                            <option value="Schlamm">
+                            <option value="Lava">
+                        </datalist>
+                        <span class="rangeValue">&nbsp;</span>
+                    </div>
+                    <div class="settingWrapper">
+                        <label for="spezialFieldType">Spezialfeld</label>
+                        <input autocomplete="off" type="text" list="spezialFieldTypes" name="spezialFieldType">
+                        <datalist id="spezialFieldTypes">
+                            <option value="Battery">
+                            <option value="Booster">
+                            <option value="Leben">
+                            <option value="Unsichtbar">
+                        </datalist>
+                        <span class="rangeValue">&nbsp;</span>
+                    </div>
+                </div>
+                <div class="button">Übernehmen</div>
+                <div class="settingblock">
+                    <h2>Karteneinstellungen:</h2>
+                    <div class="settingWrapper">
+                        <label for="width">Breite:</label>
+                        <input type="range" step="1" min="8" max="50" name="width" id="widhtRange" oninput="showRangeValue(this);">
+                        <span class="rangeValue">25</span>
+                    </div>
+                    <div class="settingWrapper">
+                        <label for="length">Länge:</label>
+                        <input type="range" step="1" min="8" max="50" name="length" id="lengthRange" oninput="showRangeValue(this);">
+                        <span class="rangeValue">25</span>
+                    </div>
+                    <div class="settingWrapper">
+                        <label for="fieldsize">Feldgröße:</label>
+                        <input type="range" step="0.1" min="1.0" max="4.0" name="fieldsize" id="fieldsizeRange" oninput="showRangeValue(this);">
+                        <span class="rangeValue">2.5</span>
+                    </div>
+                    <h2>Sonneneinstellungen:</h2>
+                    <div class="settingWrapper">
+                        <label for="sunAngle">Stand:</label>
+                        <input type="time" step="300" min="6:30" max="11.30" name="sunAngle" id="fieldsizeRange">
+                        <span class="rangeValue">&nbsp;</span>
+                    </div>
+                    <div class="settingWrapper">
+                        <label for="sundirection">Richtung:</label>
+                        <input type="range" value="0" step="5" min="0" max="360" name="sundirection" id="fieldsizeRange" oninput="showRangeValue(this);">
+                        <span class="rangeValue">0</span>
+                    </div>
+                </div>
+                <div class="button">Übernehmen</div>
+            </div>
+        </div>
+        <div class="mainPane">
+            <div class="actionsWrapper">
+                <div class="menuWrapperLeft">
+                    <div class="button">Fliegen</div>
+                    <div class="button">Gehen</div>
+                </div>
+                <div class="menuWrapperRight">
+                    <div class="button" onclick="openPopup();">Laden</div>
+                    <div class="button">Prüfen</div>
+                    <div class="button">Speichern</div>
+                    <div class="button">Reset</div>
+                    <div class="button">Verlassen</div>
+                </div>
+            </div>
+            <div class="CanvasWrapper3D">
+                <img src="http://via.placeholder.com/1920x1080?text=Map%20Canvas" alt="3D mapcanvas">
+            </div>
+            <div class="assetWrapper">
+                <div class="scrollLeft" onclick="scrollAssetLeft();"><div class="label">LEFT</div></div>
+                <div class="assetWrapperOverflow">
+                    <div class="assetScrollPanel">
+                        <div class="assetItemWrapper">
+                            <div class="assetImage">
+                                <img src="http://via.placeholder.com/125?text=Asset" alt="">
+                            </div>
+                            <div class="assetName">
+                                <span>AssetName</span>
+                            </div>
+                        </div>
+                        <div class="assetItemWrapper">
+                            <div class="assetImage">
+                                <img src="http://via.placeholder.com/125?text=Asset" alt="">
+                            </div>
+                            <div class="assetName">
+                                <span>AssetName</span>
+                            </div>
+                        </div>
+                        <div class="assetItemWrapper">
+                            <div class="assetImage">
+                                <img src="http://via.placeholder.com/125?text=Asset" alt="">
+                            </div>
+                            <div class="assetName">
+                                <span>AssetName</span>
+                            </div>
+                        </div>
+                        <div class="assetItemWrapper">
+                            <div class="assetImage">
+                                <img src="http://via.placeholder.com/125?text=Asset" alt="">
+                            </div>
+                            <div class="assetName">
+                                <span>AssetName</span>
+                            </div>
+                        </div>
+                        <div class="assetItemWrapper">
+                            <div class="assetImage">
+                                <img src="http://via.placeholder.com/125?text=Asset" alt="">
+                            </div>
+                            <div class="assetName">
+                                <span>AssetName</span>
+                            </div>
+                        </div>
+                        <div class="assetItemWrapper">
+                            <div class="assetImage">
+                                <img src="http://via.placeholder.com/125?text=Asset" alt="">
+                            </div>
+                            <div class="assetName">
+                                <span>AssetName</span>
+                            </div>
+                        </div>
+                        <div class="assetItemWrapper">
+                            <div class="assetImage">
+                                <img src="http://via.placeholder.com/125?text=Asset" alt="">
+                            </div>
+                            <div class="assetName">
+                                <span>AssetName</span>
+                            </div>
+                        </div>
+                        <div class="assetItemWrapper">
+                            <div class="assetImage">
+                                <img src="http://via.placeholder.com/125?text=Asset" alt="">
+                            </div>
+                            <div class="assetName">
+                                <span>AssetName</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scrollRight" onclick="scrollAssetsRight();"><div class="label">RIGHT</div></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

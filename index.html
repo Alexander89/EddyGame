@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Eddy-Game</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/eddy.css" >
+		<script type="text/javascript" src="sgl/gl-matrix.js"></script>
+
+		<script type="text/javascript" src="sgl/smartGl.js"></script>
+		<script type="text/javascript" src="sgl/sGL_Transform.js"></script>
+		<script type="text/javascript" src="sgl/sGL_Maths.js"></script>
+		<script type="text/javascript" src="sgl/sGL_Collision.js"></script>
+		<script type="text/javascript" src="sgl/sGL_Shader.js"></script>
+		<script type="text/javascript" src="sgl/sGL_Camera.js"></script>
+		<script type="text/javascript" src="sgl/sGL_Input.js"></script>
+		<script type="text/javascript" src="sgl/sGL_Modal.js"></script>
+		<script type="text/javascript" src="sgl/sGL_Light.js"></script>
+		<script type="text/javascript" src="sgl/sGL_Ui.js"></script>
+		<script type="text/javascript" src="sgl/sGL_Audio.js"></script>
+		<script type="text/javascript" src="sgl/sGL_Primitives.js"></script>
+		<script type="text/javascript" src="sgl/sGL_Scene.js"></script>
+
+		<script type="text/javascript" src="js/md5.js"></script>
+		<script type="text/javascript" src="js/menue.js"></script>
+		<script type="text/javascript" src="js/eddyGame.js"></script>
+		<script type="text/javascript" src="js/eddy.js"></script>
+		<script type="text/javascript" src="js/lvl.js"></script>
+		<script type="text/javascript" src="js/effectItem.js"></script>
+	</head>
+	<body onload="" id="body" >
+		<div id="menueBG">
+			<div id="menue" class="view">
+				<div class="userlogin"><div>Name:</div><input type="" id="username"><span id="usernameFix" style="display: none;"></span><div id="passwordTitle">Passwort:</div><input type="password" id="password"><div id="login" class="smallButton">Anmelden</div><div id="logoff" class="smallButton" style="display: none;">Abmelden</div></div>
+				<div id="start">Spiel starten</div>
+				<div id="mapEditor">Karte bauen</div>
+				<div id="einstellungen">Einstellungen</div>
+				<div id="mail">Feedback, Wünsche und Ideen</div>
+			</div>
+			<div id="serverSelect" class="view">
+					<div id="freiesSpiel" class="button">Freies Spiel</div>
+					<div id="refreshServers" class="ServerListe button">Verfügbare Server: (refresh)</div>
+					<div id="serverListeHeader">
+						<ul>
+							<li>Server:</li><li>Spieler:</li><li>Level:</li><li>Aktiv:</li>
+						</ul>
+					</div>
+					<div id="serverListe" class="ListContent">
+						<ul><li>laden....</li></ul>
+					</div>
+					<div id="zurueckZuMain" class="button">Zurück</div>
+			</div>
+			<div id="room" class="view">
+				<div id="LvlSelect">
+					<div class="mapSelectHeader">Kartenauswahl: <span id="lvlSelectCount"></span> Stück</div>
+					<div id="LvlSelectContainer" > 
+					</div>
+					<div class="lvlSelectNavigation">
+						<div id="lvlSelectLetzten" class="button">Zurück</div>
+						<div id="lvlSelectWeitere" class="button">Weiter</div>
+						<br />
+						<div id="lvlSelectAbbrechen" class="button">Abbrechen</div>
+					</div>
+				</div>
+				<div id="LvlVote">
+					<div class="mapSelectHeader"><span id="lvlVoteOpener"></span> möchte gerne diese Karte spielen</div>
+					<div id="LvlVoteContainer"> 
+					</div>
+					<div class="lvlSelectNavigation">
+						<div id="lvlVoteImportantNote"></div>
+						<div id="LvlVoteNo" class="button buttonRed">Lieber nicht</div>
+						<div id="LvlVoteYes" class="button buttonGreen">Ok, ich bin dabei</div>
+					</div>
+				</div>
+				<div>
+					<div id="zurueckZurServerList" class="button">Zurück</div>
+					<div id="currentRoom" class="header" >Server: </div>
+				</div>
+				<div class="roomContainer" >
+					<div class="lvlRight">
+						<div id="Lvl">
+							<div id="lvlHeader">Karte:
+								<div id="lvlChange">Ändern</div>
+								<span id="lvlName"></span> 
+							</div>
+							<img id="lvlImg" />
+							<div id="lvlShowData">V V</div>
+							<div id="lvlData" style="max-height: 0px;">
+								<div>Version:<div id="lvlVers"></div></div>
+								<div>Autor:<div id="lvlAutor"></div></div>
+								<div>Max:<div id="lvlMaxP"></div></div>
+								<div>Datum:<div id="lvlDate"></div></div>
+								<div id="lvlInfoLink" class="link">Info<div class="tooltip hidden" id="lvlinfo" style="display: none;"></div></div>
+							</div>
+						</div>
+						<div id="skills">	
+							<div>Skill:</div>
+							<div id="skillSellectField" class="skillSellectField"><div id="skillSellector" class="skillSellector"></div></div>
+						</div>
+					</div>
+					<div class="lvlSpielerContainer" >
+						<div class="smallHeader" >SpielerListe:</div>
+						<div id="spielerliste"></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div>
+					<div class="chat">
+						<div id="chatText"></div>
+						<div class="chatMSG"><input id="chatMsg" type="text"></div><div id="chatSend" class="chatSend">Send</div>
+					</div>
+					<div class="roomControlls">
+						<div id="startAsSeeker" class="smallButton">Als Sucher Bereit</div>
+						<div id="startGame" class="smallButton">Bereit</div>
+					</div>
+				</div>
+			</div>
+			<div id="settings" class="view" >
+				<div class="header">Einstellungen</div>
+				<div id="OptionList" class="ListContent">
+						<ul class="SpaltenSlider">
+							<li>Auflösung:</li>
+							<li><span id="width">10</span>x<span id="height">20</span></li>
+							<li><div id="slidecontainer"><input type="range" min="0.4" max="1" value="1" step="0.01" id="aufloesung"></div></li>
+						</ul>
+						<ul class="SpaltenSlider">
+							<li>Schatten:</li>
+							<li><span id="shadowValue"></span></li>
+							<li><div id="slidecontainer"><input type="range" min="0" max="3" value="1" step="1" id="schatten"></div></li>
+						</ul>
+						<ul class="SpaltenSlider">
+							<li>Schattenhärte:</li>
+							<li><span id="shadowDetailsValue"></span></li>
+							<li><div id="slidecontainer"><input type="range" min="0" max="2" value="1" step="1" id="schattendetails"></div></li>
+						</ul>
+						<!--<ul class="SpaltenJaNein">
+							<li>Schatten Details:</li>
+							<li><div id="slidecontainer"><input type="range" min="0" max="2" value="1" step="1" id="schattendetails"></div></li>
+							<li><span id="shadowDetailsValue">Normal</span></li>
+						</ul>-->
+						<ul class="SpaltenAuswahl">
+							<li>Steuerung:</li>
+							<li>
+								<select id="controller"> 
+									<option>GamePad</option>
+									<option>Tastatur</option>
+								</select>
+							</li>
+							
+						</ul>
+					</div>
+				<div id="settingsZurueck" class="button">Zurück</div>
+			</div>
+			<div id="feedback" class="view" >
+				<div class="header">Feedback, Wünsche und Ideen</div>
+				<div id="feedbackArea" ><textarea id="feedbackText"></textarea></div>
+				<div id="feedbackSend" class="button">Abschicken</div>
+				<div id="feedbackZurueck" class="button">Zurück</div>
+			</div>			
+			<div id="result" class="view" style="display:none;">
+				<div class="theWinnerIs">The Winner is:</div>
+				<div id="theWinner"></div>
+				<div id="resultReason">Catched</div>
+
+				<div class="resultHeader">Sucher:</div>
+				<div class="resultListContainer">
+					<div><span>Name:</span><span id="seekerName"></span></div><div><span>Leben:</span><span id="seekerHealth"></span></div>
+				</div>
+				<div class="resultHeader">Gesuchte(r):</div>
+				<div id="resultPlayerContainer" class="resultListContainer">
+				</div>
+
+				<div id="resBackToRoom" class="button">Weiter Spielen</div>
+				<div id="resBacktoServerList" class="button">Zur Serverauswahl</div>
+				<div id="resHauptmenue" class="button">Hauptmenü</div>
+			</div>
+		</div>
+		<div id="game" class="container" style="display:none;">		
+			<canvas id="WebGL" height="500" width="500"></canvas>
+			<canvas id="lvl" height="50" width="50"></canvas>
+			<div class="timeout">
+				<div id="timeout"></div>
+			</div>
+			<!--<div class="fps">
+				<div>FPS: <span id="fps"></span></div>
+			</div>-->
+			<div class="batteryContainer">
+				<div class="battery"><span id="battery" class="batteryLVL"></span></div>
+			</div>
+			<div class="hideContainer">
+				<div class="hide"><span id="hide" class="hideAvailables"></span></div>
+			</div>
+			<div class="healthContainer">
+				<div class="health"><span id="health" class="healthLVL"></span></div>
+			</div>
+			<div id="inGameMenue" class="inGameMenue">
+				<div>Menue</div>
+				<div id="igm_ton" class="button" >Musik/Ton</div>
+				<div id="igm_contr" class="button" >Steuerung</div>
+				<div id="igm_graph" class="button" >Graphik</div>
+				<div id="igm_leave" class="button" >Verlassen (-10 Punkte)</div>
+				<div id="igm_weiter" class="button" >Weiter Spielen</div>
+			</div>
+			<div id="inGameMenueAudio" class="inGameMenue">
+				<div>Musik/Ton</div>
+				<div id="igm_a_mute" class="button" >Mute <input type="checkbox" value="0" class="css-checkbox" id="mute"><label for="mute" class="right"></label></div>
+				<div id="igm_a_volume" class="button" >Lautstärke: <input type="range" min="0" max="1" value="1" step="0.05" id="volume"></div>
+				<div id="igm_a_zuruck" class="button" >Zurück</div>
+			</div>
+			<div id="ImportantMessage"></div>
+			<div id="fullscreenMessage"></div>
+			<div id="infoMessageBox">
+			</div>
+		</div>
+
+		<div style="display:none;">
+			<img id="spec" src="img/stdSpec.png"/>
+			<img id="normal" src="img/stdNormal.png"/>
+		</div>
+	</body>
+</html>
